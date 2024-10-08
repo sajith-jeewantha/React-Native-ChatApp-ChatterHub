@@ -7,7 +7,7 @@
   </a>
 </p>
 
-<h6 align="center">Follow us on</h6>
+<h6 align="center">Follow me on</h6>
 <p align="center">
   
   <a aria-label="Follow @expo on GitHub" href="https://github.com/sajith-jeewantha" target="_blank">
@@ -19,7 +19,13 @@
   </a>
 </p>
 
-<img alt="image1" src="./github/image1.PNG" width="50%">
-<img alt="image2" src="./github/image2.PNG" width="50%">
-<img alt="image3" src="./github/image3.PNG" width="50%">
-<img alt="image4" src="./github/image4.PNG" width="50%">
+## Introduction
+
+Welcome to the React Native Expo Chat Application! This project is a feature-rich mobile chat app built using React Native and Expo. It is designed to provide a seamless messaging experience with real-time chat functionality and an intuitive user interface. 
+
+
+## 📸 ScreenShots
+
+
+<img alt="image1" src="./github/image1.PNG" width="30%">&nbsp;<img alt="image2" src="./github/image2.PNG" width="30%">&nbsp;
+<img alt="image3" src="./github/image3.PNG" width="30%">&nbsp;<img alt="image4" src="./github/image4.PNG" width="30%">&nbsp;
