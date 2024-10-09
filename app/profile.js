@@ -21,6 +21,7 @@ import { useFonts } from "expo-font";
 import { IMAGE_URL, URL } from "../config";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import details from "./details";
+import { OptionItem } from "../components/OptionItem";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -68,14 +69,10 @@ export default function prifile() {
         <Ionicons name="ellipsis-vertical" size={24} color="black" />
       </View>
 
-      {/* Header */}
       <View style={styles.header}>
         <View style={getAuth.user_image ? null : styles.avatar}>
           {getAuth.user_image ? (
-            <Image
-              source={IMAGE_URL + getMobile + ".png"}
-              style={styles.avatar}
-            />
+            <Image source={IMAGE_URL + getMobile + ".png"} style={styles.avatar} />
           ) : (
             <Text style={styles.avatartext}>{getAuth.avatar_letter}</Text>
           )}
@@ -87,7 +84,6 @@ export default function prifile() {
         </Text>
       </View>
 
-      {/* Stats */}
       <View style={styles.statsContainer}>
         <Pressable
           style={styles.stat}
@@ -101,13 +97,11 @@ export default function prifile() {
             }
           }}
         >
-          {/* <Text style={styles.statNumber}>1501</Text> */}
           <Ionicons name="log-out-outline" size={24} color="red" />
           <Text style={styles.statLabel}>Log out</Text>
         </Pressable>
       </View>
 
-      {/* Options */}
       <View style={styles.optionsContainer}>
         <OptionItem
           icon="envelope"
@@ -152,26 +146,6 @@ export default function prifile() {
     </View>
   );
 }
-
-const OptionItem = ({ icon, title, description, route, name }) => {
-  return (
-    <TouchableOpacity
-      style={styles.option}
-      onPress={() => {
-        route == true ? router.push("/" + name) : null;
-      }}
-    >
-      <View style={styles.optionLeft}>
-        <FontAwesome name={icon} size={20} color="gray" />
-        <View style={styles.optionText}>
-          <Text style={styles.optionTitle}>{title}</Text>
-          <Text style={styles.optionDescription}>{description}</Text>
-        </View>
-      </View>
-      <FontAwesome name="chevron-right" size={18} color="gray" />
-    </TouchableOpacity>
-  );
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -260,32 +234,6 @@ const styles = StyleSheet.create({
   optionsContainer: {
     flex: 1,
     marginTop: 20,
-  },
-  option: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: 15,
-    backgroundColor: "white",
-    borderBottomWidth: 1,
-    borderColor: "#E0E0E0",
-    paddingHorizontal: 30,
-    paddingVertical: 20,
-  },
-  optionLeft: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  optionText: {
-    marginLeft: 10,
-  },
-  optionTitle: {
-    fontSize: 16,
-    fontWeight: "500",
-  },
-  optionDescription: {
-    fontSize: 12,
-    color: "gray",
   },
   bottom: {
     flexDirection: "row",

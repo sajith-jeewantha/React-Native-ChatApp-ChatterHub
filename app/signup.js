@@ -21,7 +21,7 @@ export default function signup() {
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
 
-  const logimage = require("../assets/images/Clogo.gif");
+  const logoimage = require("../assets/images/Clogo.gif");
 
   return (
     <View style={styles.view1}>
@@ -31,7 +31,7 @@ export default function signup() {
         keyboardVerticalOffset={60}
       >
 
-      <Image style={styles.image} source={logimage} contentFit="contain" />
+      <Image style={styles.image} source={logoimage} contentFit="contain" />
 
       <TextInput
         style={styles.input}

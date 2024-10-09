@@ -56,8 +56,13 @@ export default function home() {
     if (response.ok) {
       let chatArray = await response.json();
       setMessages(chatArray);
+      console.log(chatArray);
     }
   };
+
+  async function deleteMessage(id) {
+    await fetch(URL + "/DeleteChat?id=" + id);
+  }
 
   useEffect(() => {
     chatRefresh = setInterval(() => {
@@ -84,10 +89,16 @@ export default function home() {
             }}
           />
           <View style={styles.namebar}>
-            <Image
-              source={IMAGE_URL + chat_user.user_mobile + ".png"}
-              style={styles.avatar}
-            />
+            <View style={styles.avatar}>
+              {chat_user.user_image == "true" ? (
+                <Image
+                  source={IMAGE_URL + chat_user.user_mobile + ".png"}
+                  style={styles.avatar}
+                />
+              ) : (
+                <Text style={styles.avatartext}>{chat_user.avatar_letter}</Text>
+              )}
+            </View>
 
             <View>
               <Text style={styles.title}>{chat_user.user_name}</Text>
@@ -104,8 +115,21 @@ export default function home() {
           data={messages}
           // ref={flatListRef}
           renderItem={({ item }) => (
-            //   console.log(item.message)
-            <View
+            // console.log(item.id)
+            <TouchableOpacity
+              onLongPress={() => {
+                Alert.alert("Message", "Delete Message", [
+                  {
+                    text: "Cancel",
+                    style: "cancel",
+                  },
+                  {
+                    text: "Delete",
+                    onPress: () => deleteMessage(item.id),
+                    style: "default",
+                  },
+                ]);
+              }}
               style={
                 item.side == "right"
                   ? styles.sentMessage
@@ -122,7 +146,7 @@ export default function home() {
                   color={item.status == 1 ? "green" : "gray"}
                 />
               ) : null}
-            </View>
+            </TouchableOpacity>
           )}
           contentContainerStyle={styles.messagesContainer}
           estimatedItemSize={200}
@@ -220,6 +244,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#DCDCDC",
+  },
+  avatartext: {
+    fontSize: 24,
+    fontFamily: "Roboto-Black",
+    alignSelf: "center",
+    justifyContent: "center",
+    textTransform: "uppercase",
   },
   messagesContainer: {
     padding: 20,
