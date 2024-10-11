@@ -19,7 +19,6 @@ import { Tabs, router, useLocalSearchParams } from "expo-router";
 import { Image } from "expo-image";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import { IMAGE_URL, URL } from "../config";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Audio } from "expo-av";
 
@@ -47,8 +46,8 @@ export default function home() {
     let userJson = await AsyncStorage.getItem("auth");
     let auth = JSON.parse(userJson);
     let response = await fetch(
-      URL +
-        "/LoadChat?user_id=" +
+      process.env.EXPO_PUBLIC_API_URL +
+        "/ChatterHub/LoadChat?user_id=" +
         auth.user.id +
         "&other_user_id=" +
         chat_user.user_id
@@ -56,12 +55,12 @@ export default function home() {
     if (response.ok) {
       let chatArray = await response.json();
       setMessages(chatArray);
-      console.log(chatArray);
+      // console.log(chatArray);
     }
   };
 
   async function deleteMessage(id) {
-    await fetch(URL + "/DeleteChat?id=" + id);
+    await fetch(process.env.EXPO_PUBLIC_API_URL + "/ChatterHub/DeleteChat?id=" + id);
   }
 
   useEffect(() => {
@@ -92,7 +91,7 @@ export default function home() {
             <View style={styles.avatar}>
               {chat_user.user_image == "true" ? (
                 <Image
-                  source={IMAGE_URL + chat_user.user_mobile + ".png"}
+                  source={process.env.EXPO_PUBLIC_API_URL+"/ChatterHub/AvatarImages/"+ chat_user.user_mobile + ".png"}
                   style={styles.avatar}
                 />
               ) : (
@@ -174,8 +173,8 @@ export default function home() {
                 let authJson = await AsyncStorage.getItem("auth");
                 let auth = JSON.parse(authJson);
                 let response = await fetch(
-                  URL +
-                    "/SendChat?user_id=" +
+                  process.env.EXPO_PUBLIC_API_URL +
+                    "/ChatterHub/SendChat?user_id=" +
                     auth.user.id +
                     "&other_user_id=" +
                     chat_user.user_id +

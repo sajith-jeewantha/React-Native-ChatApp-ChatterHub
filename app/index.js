@@ -14,7 +14,6 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Link, router } from "expo-router";
 import { Image } from "expo-image";
 import * as Notifications from "expo-notifications";
-import { URL } from "../config";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -56,7 +55,7 @@ export default function App() {
   }
 
   return (
-    <View style={styles.view1}>
+    <View style={styles.container}>
       <KeyboardAvoidingView
         // style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : undefined}
@@ -93,7 +92,7 @@ export default function App() {
               password: password,
             };
 
-            const response = await fetch(URL + "/SignIn", {
+            const response = await fetch(process.env.EXPO_PUBLIC_API_URL + "/ChatterHub/SignIn", {
               method: "POST",
               body: JSON.stringify(data),
               headers: {
@@ -137,7 +136,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  view1: {
+  container: {
     flex: 1,
     justifyContent: "center",
     paddingHorizontal: 20,

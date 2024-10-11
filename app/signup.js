@@ -13,7 +13,6 @@ import {
 import { FontAwesome } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { Image } from "expo-image";
-import { URL } from "../config";
 
 export default function signup() {
   const [firstname, setFirstname] = useState("");
@@ -24,7 +23,7 @@ export default function signup() {
   const logoimage = require("../assets/images/Clogo.gif");
 
   return (
-    <View style={styles.view1}>
+    <View style={styles.container}>
       <KeyboardAvoidingView
         // style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : undefined}
@@ -85,7 +84,7 @@ export default function signup() {
             password: password,
           };
 
-          const response = await fetch(URL + "/SignUp", {
+          const response = await fetch(process.env.EXPO_PUBLIC_API_URL + "/ChatterHub/SignUp", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -123,7 +122,7 @@ export default function signup() {
 }
 
 const styles = StyleSheet.create({
-  view1: {
+  container: {
     flex: 1,
     justifyContent: "center",
     paddingHorizontal: 20,

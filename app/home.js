@@ -17,7 +17,6 @@ import { Tabs, router } from "expo-router";
 import { Image } from "expo-image";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import { IMAGE_URL, URL } from "../config";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 SplashScreen.preventAutoHideAsync();
@@ -51,7 +50,7 @@ export default function home() {
       let auth = JSON.parse(userJson);
       // console.log(text)
       let response = await fetch(
-        URL + "/LoadHomeData?id=" + auth.user.id + "&search=" + text
+        process.env.EXPO_PUBLIC_API_URL + "/ChatterHub/LoadHomeData?id=" + auth.user.id + "&search=" + text
       );
 
       if (response.ok) {
@@ -67,10 +66,6 @@ export default function home() {
       router.replace("/");
     }
   };
-
-  // useEffect(() => {
-   
-  // }, []);
 
   const handleRefresh = () => {
     setrefreshing(true);
@@ -117,7 +112,7 @@ export default function home() {
             <View style={styles.avatar}>
               {item.user_image ? (
                 <Image
-                  source={IMAGE_URL + item.user_mobile + ".png"}
+                  source={process.env.EXPO_PUBLIC_API_URL+"/ChatterHub/AvatarImages/" + item.user_mobile + ".png"}
                   style={styles.avatar}
                 />
               ) : (

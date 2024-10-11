@@ -18,7 +18,6 @@ import { Tabs, router } from "expo-router";
 import { Image } from "expo-image";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import { IMAGE_URL, URL } from "../config";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as ImagePicker from "expo-image-picker";
 
@@ -40,7 +39,7 @@ export default function details() {
           setFirstname(auth.user.first_name);
           setLastname(auth.user.last_name);
           if (auth.user_image) {
-            setImage(IMAGE_URL + auth.user.mobile + ".png");
+            setImage(process.env.EXPO_PUBLIC_API_URL+"/ChatterHub/AvatarImages/"+ auth.user.mobile + ".png");
           }
 
         }
@@ -118,7 +117,7 @@ export default function details() {
                 uri: getImage,
               });
             }
-            const response = await fetch(URL + "/UpdateProfile", {
+            const response = await fetch(process.env.EXPO_PUBLIC_API_URL + "/ChatterHub/UpdateProfile", {
               method: "POST",
               body: formdata,
             });

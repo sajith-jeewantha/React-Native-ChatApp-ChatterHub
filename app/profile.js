@@ -18,7 +18,6 @@ import { Tabs, router } from "expo-router";
 import { Image } from "expo-image";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import { IMAGE_URL, URL } from "../config";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import details from "./details";
 import { OptionItem } from "../components/OptionItem";
@@ -72,7 +71,7 @@ export default function prifile() {
       <View style={styles.header}>
         <View style={getAuth.user_image ? null : styles.avatar}>
           {getAuth.user_image ? (
-            <Image source={IMAGE_URL + getMobile + ".png"} style={styles.avatar} />
+            <Image source={process.env.EXPO_PUBLIC_API_URL+"/ChatterHub/AvatarImages/"+ getMobile + ".png"} style={styles.avatar} />
           ) : (
             <Text style={styles.avatartext}>{getAuth.avatar_letter}</Text>
           )}
